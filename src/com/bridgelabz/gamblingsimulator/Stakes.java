@@ -2,11 +2,25 @@ package com.bridgelabz.gamblingsimulator;
 
 public class Stakes {
     int stakesPerDay;
-    int betPerGame;
+    static int betPerGame = 1;
+    static int totalStakes = 100;
+
 
     public Stakes(int stakesPerDay, int betPerGame) {
         this.stakesPerDay = stakesPerDay;
         this.betPerGame = betPerGame;
+    }
+
+    public Stakes() {
+
+    }
+
+    public int getTotalStakes() {
+        return totalStakes;
+    }
+
+    public void setTotalStakes(int totalStakes) {
+        Stakes.totalStakes = totalStakes;
     }
 
     public int getStakesPerDay() {
@@ -22,6 +36,6 @@ public class Stakes {
     }
 
     public void setBetPerGame(int betPerGame) {
-        this.betPerGame = betPerGame;
+        Stakes.betPerGame = betPerGame;
     }
 }
