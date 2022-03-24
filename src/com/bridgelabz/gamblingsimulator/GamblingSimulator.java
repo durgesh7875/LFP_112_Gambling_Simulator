@@ -1,34 +1,41 @@
 package com.bridgelabz.gamblingsimulator;
 
+import java.util.Scanner;
+
 public class GamblingSimulator {
 
     public static int counter;
     static int BET_PER_DAY = 1;
-    static int TOTAL_MONTHS = 5;
+    static int TOTAL_MONTHS = 1;
     static int TOTAL_DAYS = 20;
     static int[] perDayAmount;// = new int[TOTAL_DAYS];//for the storing day wiz amount
 
     GamblingSimulator() {
-
         counter = 0;//initialize the counter
     }
 
     public static void main(String[] args) {
         Stakes stakes = new Stakes();
-        while (TOTAL_MONTHS >= 1) {
-            TOTAL_DAYS = 20;
-            counter = 0;
-            perDayAmount = new int[TOTAL_DAYS];
+        //Repeat if user want  to play next month
+        while (TOTAL_MONTHS == 1) {
+            TOTAL_DAYS = 20; //Reinitialize for next month
+            counter = 0;//Reinitialize for next month
+            perDayAmount = new int[TOTAL_DAYS];//Reinitialize for next month
             int totalDays = TOTAL_DAYS;
             while (totalDays > 0) {
                 checkWinnerLoose();
                 totalDays--;
             }
-            TOTAL_MONTHS--;
+            System.out.println("You want to play again if yes press 1, If not press 0");
+            TOTAL_MONTHS = (new Scanner(System.in)).nextInt();
+            if (TOTAL_MONTHS == 0) {
+                break;
+            }
             calculateLuckyDay(perDayAmount);
         }
     }
 
+    //Find the lucky and unlucky day from the month
     public static void calculateLuckyDay(int[] perDayAmount) {
         int lucky = perDayAmount[0];
         int unLucky = perDayAmount[0];
@@ -46,13 +53,6 @@ public class GamblingSimulator {
         }
         System.out.println("luckiest day where you won maximum : " + luckyWinDay);
         System.out.println("Unluckiest day where you lost maximum : " + unLuckyLostDay);
-    }
-
-    //Print the day wise amount
-    public static void printResult() {
-        for (int i = 0; i < TOTAL_DAYS; i++) {
-            System.out.println("Day " + (i + 1) + " Amount is " + perDayAmount[i]);
-        }
     }
 
     //Check the bet win or loose
