@@ -3,9 +3,10 @@ package com.bridgelabz.gamblingsimulator;
 public class GamblingSimulator {
 
     static int BET_PER_DAY = 1;
+    static int TOTAL_MONTHS = 5;
     static int counter;
-    static final int TOTAL_DAYS = 20;
-    static int[] perDayAmount = new int[TOTAL_DAYS]; //for the storing day wize amount
+    static int TOTAL_DAYS = 20;
+    static int[] perDayAmount; //for the storing day wize amount
 
     GamblingSimulator() {
         counter = 0; //initialize the counter
@@ -40,28 +41,38 @@ public class GamblingSimulator {
         calculatePerDayAmount(stakes.getTotalStakes(), winCash, looseCash);
     }
 
-    public static void calculatePerDayAmount (int totalStakes, int winCash, int looseCash) {
+    public static void calculatePerDayAmount(int totalStakes, int winCash, int looseCash) {
         // storing win or loose amount in variable
-        if(totalStakes == 150) {
+        if (totalStakes == 150) {
             perDayAmount[counter++] = winCash;
-        }
-        else {
+        } else {
             perDayAmount[counter++] = looseCash;
         }
     }
+
     // print day waise amount
-    public static void printResult () {
+    public static void printResult() {
         for (int i = 0; i < TOTAL_DAYS; i++)
-            System.out.println("Day " + (i+1) + " --> " + "Amount is: " + perDayAmount[i] + "$");
+            System.out.println("Day " + (i + 1) + " --> " + "Amount is: " + perDayAmount[i] + "$");
     }
 
     public static void main(String[] args) {
         Stakes stakes = new Stakes();
+
+        while (TOTAL_MONTHS >= 1) {
+            TOTAL_DAYS = 20;
+            counter = 0;
+            perDayAmount = new int[TOTAL_DAYS];
+
         int totalDays = TOTAL_DAYS;
         while (totalDays > 0) {
             checkWinOrLoose();
             totalDays--;
         }
-        printResult();
+
+            printResult();
+        }
+        TOTAL_MONTHS--;
     }
 }
+
